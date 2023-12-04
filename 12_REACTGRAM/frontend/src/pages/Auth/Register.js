@@ -1,5 +1,3 @@
-import './Auth.css';
-
 // Components
 import { Link } from 'react-router-dom';
 import FormSubmit from '../../components/FormSubmit';
@@ -49,25 +47,25 @@ const Register = () => {
         <input
           type="text"
           placeholder="Nome"
-          value={name}
+          value={name || ''}
           onChange={(e) => setName(e.target.value)}
         />
         <input
           type="email"
           placeholder="E-mail"
-          value={email}
+          value={email || ''}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Senha"
-          value={password}
+          value={password || ''}
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
           type="password"
           placeholder="Confirme sua senha"
-          value={confirmPassword}
+          value={confirmPassword || ''}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         <FormSubmit loading={loading} error={error} btnValue="Cadastrar" />

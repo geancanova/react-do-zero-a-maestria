@@ -1,5 +1,3 @@
-import './Auth.css';
-
 // Components 
 import { Link } from 'react-router-dom';
 import FormSubmit from '../../components/FormSubmit';
@@ -46,13 +44,13 @@ const Login = () => {
           type="text"
           placeholder="E-mail"
           onChange={(e) => setEmail(e.target.value)}
-          value={email}
+          value={email || ''}
         />
         <input
           type="password"
           placeholder="Senha"
           onChange={(e) => setPassword(e.target.value)}
-          value={password}
+          value={password || ''}
         />
         <FormSubmit loading={loading} error={error} btnValue="Entrar" />
       </form>
