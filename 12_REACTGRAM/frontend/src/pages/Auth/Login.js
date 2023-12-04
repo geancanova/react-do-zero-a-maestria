@@ -2,7 +2,7 @@ import './Auth.css';
 
 // Components 
 import { Link } from 'react-router-dom';
-import Message from '../../components/Message';
+import FormSubmit from '../../components/FormSubmit';
 
 // Hooks
 import { useState, useEffect } from 'react';
@@ -54,11 +54,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
-        {!loading && <input type="submit" value="Entrar" />}
-        {loading && (
-          <input type="submit" value="Aguarde..." disabled />
-        )}
-        {error && <Message msg={error} type="error" />}
+        <FormSubmit loading={loading} error={error} btnValue="Entrar" />
       </form>
       <p>
         Não tem uma conta? <Link to="/register">Cadastre-se</Link>
