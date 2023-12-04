@@ -1,3 +1,5 @@
+import './EditProfile.css';
+
 import { uploads } from '../../utils/config';
 
 // Hooks
@@ -39,12 +41,32 @@ const EditProfile = () => {
     e.preventDefault();
   };
 
+  const handleFile = (e) => {
+    // Image preview
+    const image = e.target.files[0];
+    setPreviewImage(image);
+
+    // Update image state
+    setImageProfile(image);
+  };
+
   return (
     <div className="form-wrapper">
       <h2>Edite seus dados</h2>
       <p className="subtitle">
         Adicione uma imagem de perfil e conte um pouco mais sobre voce:
       </p>
+      {(user.profileImage || previewImage) && (
+        <img
+          className='profile-image'
+          src={
+            previewImage
+              ? URL.createObjectURL(previewImage)
+              : `${uploads}/users/${user.profileImage}`
+          }
+          alt={user.name}
+        />
+      )}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -61,7 +83,10 @@ const EditProfile = () => {
         />
         <label>
           <span>Imagem do Perfil:</span>
-          <input type="file" />
+          <input 
+            type="file"
+            onChange={handleFile} 
+          />
         </label>
         <label>
           <span>Bio:</span>
