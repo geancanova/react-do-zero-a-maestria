@@ -44,6 +44,10 @@
     gap: 10px;
 }
 
+#nav-links span {
+    cursor: pointer;
+}
+
 #nav-links svg {
     font-size: 1.5em;
 }
