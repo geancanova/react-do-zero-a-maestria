@@ -11,6 +11,7 @@ const FormSubmit = (props) => {
         <input type="submit" value="Aguarde..." disabled />
       )}
       {props.error && <Message msg={props.error} type="error" />}
+      {props.message && <Message msg={props.message} type="success" />}
     </>
   )
 }
