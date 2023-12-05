@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux
-import { editProfile, profile, resetMessage } from '../../slices/userSlice';
+import { profile, updateProfile, resetMessage } from '../../slices/userSlice';
 
 // Components
 import FormSubmit from '../../components/FormSubmit';
@@ -21,7 +21,7 @@ const EditProfile = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [bio, setBio] = useState('');
-  const [imageProfile, setImageProfile] = useState('');
+  const [profileImage, setProfileImage] = useState('');
   const [previewImage, setPreviewImage] = useState('');
 
   // load user data
@@ -37,8 +37,40 @@ const EditProfile = () => {
     }
   }, [user]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Gather user data from states
+    const userData = {
+      name
+    };
+
+    if (profileImage) {
+      userData.profileImage = profileImage;
+    }
+
+    if (bio) {
+      userData.bio = bio;
+    }
+
+    if (password) {
+      userData.password = password;
+    }
+
+    // Build form data
+    const formData = new FormData();
+
+    const userFormData = Object.keys(userData).forEach((key) => {
+      formData.append(key, userData[key]);
+    });
+
+    formData.append('user', userFormData);
+
+    await dispatch(updateProfile(formData));
+
+    setTimeout(() => {
+      dispatch(resetMessage());
+    }, 2000);
   };
 
   const handleFile = (e) => {
@@ -47,7 +79,7 @@ const EditProfile = () => {
     setPreviewImage(image);
 
     // Update image state
-    setImageProfile(image);
+    setProfileImage(image);
   };
 
   return (
@@ -58,7 +90,7 @@ const EditProfile = () => {
       </p>
       {(user.profileImage || previewImage) && (
         <img
-          className='profile-image'
+          className="profile-image"
           src={
             previewImage
               ? URL.createObjectURL(previewImage)
@@ -72,21 +104,18 @@ const EditProfile = () => {
           type="text"
           placeholder="Nome"
           onChange={(e) => setName(e.target.value)}
-          value={name || ''}
+          value={name || ""}
         />
         <input
           type="email"
           placeholder="E-mail"
           disabled
           onChange={(e) => setEmail(e.target.value)}
-          value={email || ''}
+          value={email || ""}
         />
         <label>
           <span>Imagem do Perfil:</span>
-          <input 
-            type="file"
-            onChange={handleFile} 
-          />
+          <input type="file" onChange={handleFile} />
         </label>
         <label>
           <span>Bio:</span>
@@ -94,7 +123,7 @@ const EditProfile = () => {
             type="text"
             placeholder="Insira sua descrição"
             onChange={(e) => setBio(e.target.value)}
-            value={bio || ''}
+            value={bio || ""}
           />
         </label>
         <label>
@@ -103,10 +132,15 @@ const EditProfile = () => {
             type="password"
             placeholder="Digite sua nova senha"
             onChange={(e) => setPassword(e.target.value)}
-            value={password || ''}
+            value={password || ""}
           />
         </label>
-        <FormSubmit btnValue="Salvar alterações" />
+        <FormSubmit
+          loading={loading}
+          error={error}
+          message={message}
+          btnValue="Salvar alterações"
+        />
       </form>
     </div>
   );
