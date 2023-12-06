@@ -1,19 +1,30 @@
-import React from 'react'
+import React from "react";
 
 // Components
-import Message from './Message'
+import Message from "./Message";
 
-const FormSubmit = (props) => {
+const FormSubmit = ({
+  loading,
+  error,
+  message,
+  btnValue,
+  cancelBtnText,
+  cancelBtnHandler,
+  cancelBtn = false,
+}) => {
   return (
     <>
-      {!props.loading && <input type="submit" value={props.btnValue} />}
-      {props.loading && (
-        <input type="submit" value="Aguarde..." disabled />
+      {!loading && <input type="submit" value={btnValue} />}
+      {loading && <input type="submit" value="Aguarde..." disabled />}
+      {cancelBtn && (
+        <button className="cancel-btn" onClick={cancelBtnHandler}>
+          {cancelBtnText}
+        </button>
       )}
-      {props.error && <Message msg={props.error} type="error" />}
-      {props.message && <Message msg={props.message} type="success" />}
+      {error && <Message msg={error} type="error" />}
+      {message && <Message msg={message} type="success" />}
     </>
-  )
-}
+  );
+};
 
-export default FormSubmit
+export default FormSubmit;
