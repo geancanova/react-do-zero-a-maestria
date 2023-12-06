@@ -19,7 +19,8 @@ import {
   publishPhoto, 
   getUserPhotos, 
   deletePhoto,
-  updatePhoto
+  updatePhoto,
+  resetError
 } from '../../slices/photoSlice';
 
 const Profile = () => {
@@ -96,6 +97,7 @@ const Profile = () => {
 
   // Show or hide forms
   const hideOrShowForms = () => {
+    dispatch(resetError());
     newPhotoForm.current.classList.toggle('hide');
     editPhotoForm.current.classList.toggle('hide');
   };

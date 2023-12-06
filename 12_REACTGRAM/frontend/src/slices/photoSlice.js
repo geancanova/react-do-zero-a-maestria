@@ -105,6 +105,9 @@ export const photoSlice = createSlice({
     resetMessage: (state) => {
       state.message = null;
     },
+    resetError: (state) => {
+      state.error = false;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -206,5 +209,5 @@ export const photoSlice = createSlice({
   }
 });
 
-export const { resetMessage } = photoSlice.actions;
+export const { resetMessage, resetError } = photoSlice.actions;
 export default photoSlice.reducer;
