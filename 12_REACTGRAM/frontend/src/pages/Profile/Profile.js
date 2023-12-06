@@ -11,12 +11,12 @@ import FormSubmit from '../../components/FormSubmit';
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useResetComponentMessage } from '../../hooks/useResetComponentMessage';
 
 // Redux
 import { getUserDetails } from "../../slices/userSlice";
 import { 
   publishPhoto, 
-  resetMessage, 
   getUserPhotos, 
   deletePhoto,
   updatePhoto
@@ -26,6 +26,8 @@ const Profile = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
+
+  const resetMessage = useResetComponentMessage(dispatch);
 
   const { user, loading } = useSelector((state) => state.user);
   const { user: userAuth } = useSelector((state) => state.auth);
@@ -50,16 +52,9 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getUserDetails(id));
     dispatch(getUserPhotos(id));
-
   }, [dispatch, id]);
   
   console.log(photos);
-  // Reset message
-  const resetComponentMessage = () => {
-    setTimeout(() => {
-      dispatch(resetMessage());
-    }, 2000);
-  };
 
   const handleFile = (e) => {
     const image = e.target.files[0];
@@ -89,14 +84,14 @@ const Profile = () => {
 
     setTitle('');
 
-    resetComponentMessage();
+    resetMessage();
   };
 
   // Delete a photo
   const handleDelete = (id) => {
     dispatch(deletePhoto(id));
 
-    resetComponentMessage();
+    resetMessage();
   };
 
   // Show or hide forms
@@ -132,7 +127,7 @@ const Profile = () => {
     };
 
     dispatch(updatePhoto(photoData));
-    resetComponentMessage();
+    resetMessage();
   };
 
   if (loading) {
@@ -202,8 +197,7 @@ const Profile = () => {
                 error={errorPhoto}
                 message={messagePhoto}
                 btnValue="Atualizar"
-                cancelBtn = {true}
-                cancelBtnText="Cancelar edição"
+                cancelBtn="Cancelar edição"
                 cancelBtnHandler={handleCancelEdit}
               />
             </form>
