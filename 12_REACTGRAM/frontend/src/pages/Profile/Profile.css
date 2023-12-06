@@ -28,11 +28,16 @@
   .photos-container {
     display: flex;
     flex-wrap: wrap;
+    gap: 1em .50%;
   }
   
   .photo {
-    width: 32%;
-    margin: 0.3%;
+    width: 33%;
+  }
+
+  .photo .photo-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
   }
   
   .photo img {
