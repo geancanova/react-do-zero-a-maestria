@@ -8,9 +8,8 @@ const FormSubmit = ({
   error,
   message,
   btnValue,
-  cancelBtnText,
-  cancelBtnHandler,
-  cancelBtn = false,
+  cancelBtn,
+  cancelBtnHandler
 }) => {
   return (
     <>
@@ -18,7 +17,7 @@ const FormSubmit = ({
       {loading && <input type="submit" value="Aguarde..." disabled />}
       {cancelBtn && (
         <button className="cancel-btn" onClick={cancelBtnHandler}>
-          {cancelBtnText}
+          {cancelBtn}
         </button>
       )}
       <MessageFeedback error={error} message={message} />
