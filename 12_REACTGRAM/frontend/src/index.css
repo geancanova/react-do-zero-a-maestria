@@ -76,6 +76,12 @@ input[type="submit"] {
   font-size: 1em;
 }
 
+.btn ~ .message-container,
+button ~ .message-container,
+input[type="submit"] ~ .message-container {
+  margin-top: 0;
+}
+
 input[type="submit"] {
   margin-top: 1em;
 }
