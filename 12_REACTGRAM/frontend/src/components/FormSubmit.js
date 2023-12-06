@@ -1,7 +1,7 @@
 import React from "react";
 
 // Components
-import Message from "./Message";
+import MessageFeedback from "./MessageFeedback";
 
 const FormSubmit = ({
   loading,
@@ -21,8 +21,7 @@ const FormSubmit = ({
           {cancelBtnText}
         </button>
       )}
-      {error && <Message msg={error} type="error" />}
-      {message && <Message msg={message} type="success" />}
+      <MessageFeedback error={error} message={message} />
     </>
   );
 };
