@@ -37,10 +37,10 @@ const commentValidation = () => {
   return [
     body("comment")
       .isString()
+      .notEmpty()
       .withMessage("O comentário é obrigatório.")
   ];
-
-}
+};
 
 module.exports = {
   photoInsertValidation,
