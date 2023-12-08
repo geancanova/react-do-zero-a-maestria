@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useResetComponentMessage } from '../../hooks/useResetComponentMessage';
+import { useLikePhoto } from '../../hooks/useLikePhoto';
 
 // Redux
 import { 
@@ -20,6 +21,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const resetMessage = useResetComponentMessage(dispatch);
+  const handleLike = useLikePhoto(dispatch, resetMessage);
 
   const { user } = useSelector((state) => state.auth);
   const { photos, loading } = useSelector((state) => state.photo);
@@ -28,12 +30,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
-
-  // Like a photo
-  const handleLike = (photo = null) => {
-    dispatch(likePhoto(photo._id));
-    resetMessage();
-  };
+  
 
   if (loading) {
     return (

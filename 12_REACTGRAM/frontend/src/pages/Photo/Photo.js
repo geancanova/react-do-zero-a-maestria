@@ -13,11 +13,11 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useResetComponentMessage } from '../../hooks/useResetComponentMessage';
+import { useLikePhoto } from '../../hooks/useLikePhoto';
 
 // Redux
 import { 
   getPhoto,
-  likePhoto,
   commentPhoto
 } from '../../slices/photoSlice';
 
@@ -27,6 +27,7 @@ const Photo = () => {
   const dispatch = useDispatch();
 
   const resetMessage = useResetComponentMessage(dispatch);
+  const handleLike = useLikePhoto(dispatch, resetMessage);
 
   const { user } = useSelector((state) => state.auth);
   const { photo, loading, error, message } = useSelector((state) => state.photo);
@@ -38,12 +39,6 @@ const Photo = () => {
   useEffect(() => {
     dispatch(getPhoto(id));
   }, [dispatch, id]);
-
-  // Like a photo
-  const handleLike = (photo) => {
-    dispatch(likePhoto(photo._id));
-    resetMessage();
-  };
 
   // Add comments to a photo
   const handleComment = (e) => {
