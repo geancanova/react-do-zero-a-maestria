@@ -41,10 +41,8 @@ const Photo = () => {
 
   // Like a photo
   const handleLike = (photo) => {
-    return () => {
-      dispatch(likePhoto(photo._id));
-      resetMessage();
-    }
+    dispatch(likePhoto(photo._id));
+    resetMessage();
   };
 
   // Add comments to a photo

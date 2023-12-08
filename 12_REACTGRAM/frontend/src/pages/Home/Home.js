@@ -30,11 +30,9 @@ const Home = () => {
   }, [dispatch]);
 
   // Like a photo
-  const handleLike = (photo) => {
-    return () => {
-      dispatch(likePhoto(photo._id));
-      resetMessage();
-    }
+  const handleLike = (photo = null) => {
+    dispatch(likePhoto(photo._id));
+    resetMessage();
   };
 
   if (loading) {
