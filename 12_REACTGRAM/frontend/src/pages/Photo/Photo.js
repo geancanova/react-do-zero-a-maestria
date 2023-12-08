@@ -86,14 +86,16 @@ const Photo = () => {
             {photo.comments.length === 0 && (
               <p>Não há comentários</p>
             )}
-            {photo.comments.map((comment) => (
-              <div className="comment" key={comment.comment}>
+            {photo.comments.map((comment, index) => (
+              <div className="comment" key={index}>
                 <div className="author">
                   {comment.userImage && (
-                    <img
-                      src={`${uploads}/users/${comment.userImage}`}
-                      alt={comment.userName}
-                    />
+                    <Link to={`/users/${comment.userId}`}>
+                      <img
+                        src={`${uploads}/users/${comment.userImage}`}
+                        alt={comment.userName}
+                      />
+                    </Link>
                   )}
                   <Link to={`/users/${comment.userId}`}>
                     {comment.userName}
