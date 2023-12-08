@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import PhotoItem from '../../components/PhotoItem';
 import LikeContainer from '../../components/LikeContainer';
 import MessageFeedback from '../../components/MessageFeedback';
+import Loader from '../../components/Loader';
 
 // Hooks
 import { useEffect, useState } from 'react';
@@ -55,7 +56,9 @@ const Photo = () => {
   };
 
   if (loading) {
-    return <p>Carregando...</p>;
+    return (
+      <Loader />
+    )
   }
 
   return (

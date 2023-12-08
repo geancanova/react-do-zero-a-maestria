@@ -11,6 +11,7 @@ import { useQuery } from '../../hooks/useQuery';
 import LikeContainer from '../../components/LikeContainer';
 import PhotoItem from '../../components/PhotoItem';
 import { Link } from 'react-router-dom';
+import Loader from '../../components/Loader';
 
 // Redux
 import { searchPhotos } from '../../slices/photoSlice';
@@ -33,7 +34,9 @@ const Search = () => {
   }, [dispatch, search]);
 
   if (loading) {
-    return <p>Carregando...</p>;
+    return (
+      <Loader />
+    )
   }
 
   return (

@@ -18,12 +18,15 @@ import Search from './pages/Search/Search';
 // Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Loader from './components/Loader';
 
 function App() {
   const { auth, loading } = useAuth();
 
   if (loading) {
-    return <p>Carregando...</p>;
+    return (
+      <Loader />
+    )
   }
 
   return (

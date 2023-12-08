@@ -3,6 +3,7 @@ import './Home.css';
 // Components
 import LikeContainer from '../../components/LikeContainer';
 import PhotoItem from '../../components/PhotoItem';
+import Loader from '../../components/Loader';
 import { Link } from 'react-router-dom';
 
 // Hooks
@@ -13,8 +14,7 @@ import { useLikePhoto } from '../../hooks/useLikePhoto';
 
 // Redux
 import { 
-  getPhotos, 
-  likePhoto 
+  getPhotos
 } from '../../slices/photoSlice';
 
 const Home = () => {
@@ -34,7 +34,7 @@ const Home = () => {
 
   if (loading) {
     return (
-      <p>Loading...</p>
+      <Loader />
     )
   }
 

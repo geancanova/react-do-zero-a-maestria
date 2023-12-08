@@ -6,6 +6,7 @@ import { uploads } from "../../utils/config";
 import { Link } from "react-router-dom";
 import { BsFillEyeFill, BsPencilFill, BsXLg } from "react-icons/bs";
 import FormSubmit from '../../components/FormSubmit';
+import Loader from '../../components/Loader';
 
 // Hooks
 import { useState, useEffect, useRef } from "react";
@@ -133,7 +134,9 @@ const Profile = () => {
   };
 
   if (loading) {
-    return <p>Carregando...</p>;
+    return (
+      <Loader />
+    )
   }
 
   return (
